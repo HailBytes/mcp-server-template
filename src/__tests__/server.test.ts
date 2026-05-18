@@ -4,9 +4,10 @@
  * and audit logging.
  */
 
-import { createMcpServer, defineTools, McpServer, ToolNotFoundError } from '../index.js';
+import { createMcpServer, defineTools, McpServer, ToolNotFoundError, ToolTimeoutError } from '../index.js';
 import { AuthMiddleware } from '../middleware/auth.js';
 import { AuditLogger } from '../middleware/audit-logger.js';
+import { StdioTransport } from '../transport/stdio.js';
 import type { ToolDefinition, ToolResult } from '../types.js';
 
 // ---------------------------------------------------------------------------
@@ -266,3 +267,68 @@ describe('AuditLogger', () => {
     spy.mockRestore();
   });
 });
+
+// ---------------------------------------------------------------------------
+// ToolTimeoutError — via McpServer with toolTimeoutMs
+// ---------------------------------------------------------------------------
+
+describe('McpServer tool timeout', () => {
+  it('rejects with ToolTimeoutError when handler is slow and timeoutMs is very low', async () => {
+    const slowTool: ToolDefinition = {
+      name: 'slow',
+      description: 'Takes a very long time',
+      inputSchema: {},
+      handler: () =>
+        new Promise((resolve) =>
+          setTimeout(
+            () => resolve({ content: [{ type: 'text', text: 'done' }] }),
+            500,
+          ),
+        ),
+    };
+
+    const server = new McpServer({
+      name: 'timeout-test-server',
+      version: '1.0.0',
+      transport: 'stdio',
+      tools: [slowTool],
+      toolTimeoutMs: 1,
+    });
+
+    await expect(server.callTool('slow', {})).rejects.toBeInstanceOf(
+      ToolTimeoutError,
+    );
+  });
+});
+
+// ---------------------------------------------------------------------------
+// StdioTransport — smoke test
+// ---------------------------------------------------------------------------
+
+describe('StdioTransport', () => {
+  it('starts and stops without throwing', async () => {
+    const server = await createMcpServer({
+      name: 'stdio-smoke-test',
+      version: '0.0.1',
+      transport: 'stdio',
+      tools: [],
+    });
+
+    // Suppress stdout writes during the test.
+    const stdoutSpy = jest
+      .spyOn(process.stdout, 'write')
+      .mockImplementation(() => true);
+
+    const transport = new StdioTransport(server, {
+      name: 'stdio-smoke-test',
+      version: '0.0.1',
+    });
+
+    await expect(transport.start()).resolves.toBeUndefined();
+    await expect(transport.stop()).resolves.toBeUndefined();
+
+    stdoutSpy.mockRestore();
+  });
+});
+
+

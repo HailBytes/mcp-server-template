@@ -87,3 +87,39 @@ describe('RateLimiter', () => {
     expect(blocked.retryAfterMs!).toBeLessThanOrEqual(60_000);
   });
 });
+
+// ---------------------------------------------------------------------------
+// Burst-limit tests
+// ---------------------------------------------------------------------------
+
+describe('RateLimiter burstLimit', () => {
+  it('allows the third call in the first 5s when burstLimit=3 and requestsPerMinute=60', () => {
+    const limiter = new RateLimiter({ requestsPerMinute: 60, burstLimit: 3 });
+    const clientId = 'burst-client-1';
+
+    const r1 = limiter.check(clientId);
+    const r2 = limiter.check(clientId);
+    const r3 = limiter.check(clientId);
+
+    expect(r1.allowed).toBe(true);
+    expect(r2.allowed).toBe(true);
+    // Third call is still within the burst limit of 3.
+    expect(r3.allowed).toBe(true);
+  });
+
+  it('blocks the third call in the first 5s when burstLimit=2 and requestsPerMinute=60', () => {
+    const limiter = new RateLimiter({ requestsPerMinute: 60, burstLimit: 2 });
+    const clientId = 'burst-client-2';
+
+    const r1 = limiter.check(clientId);
+    const r2 = limiter.check(clientId);
+    // Third call exceeds the burst limit of 2.
+    const r3 = limiter.check(clientId);
+
+    expect(r1.allowed).toBe(true);
+    expect(r2.allowed).toBe(true);
+    expect(r3.allowed).toBe(false);
+    expect(typeof r3.retryAfterMs).toBe('number');
+  });
+});
+
