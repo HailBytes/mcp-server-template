@@ -1,0 +1,49 @@
+{
+  "name": "@hailbytes/mcp-server-template",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Opinionated TypeScript scaffold for production MCP servers with built-in auth, rate limiting, audit logging, and observability.",
+  "type": "module",
+  "license": "MIT",
+  "author": "HailBytes, LLC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HailBytes/mcp-server-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HailBytes/mcp-server-template/issues"
+  },
+  "homepage": "https://hailbytes.com/mcp",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "typescript",
+    "scaffold",
+    "template",
+    "ai-infrastructure",
+    "llm-tools",
+    "hailbytes"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src --ext .ts",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
