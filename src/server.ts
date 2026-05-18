@@ -13,6 +13,7 @@ import type {
 import { AuthMiddleware } from './middleware/auth.js';
 import { RateLimiter } from './middleware/rate-limiter.js';
 import { AuditLogger } from './middleware/audit-logger.js';
+import { withTimeout } from './tool-runner.js';
 
 // ---------------------------------------------------------------------------
 // Custom error types
@@ -162,7 +163,10 @@ export class McpServer implements McpServerInstance {
       startedAt,
     };
 
-    const result = await tool.handler(input, ctx);
+    const handlerPromise = tool.handler(input, ctx);
+    const result = this.options.toolTimeoutMs
+      ? await withTimeout(handlerPromise, this.options.toolTimeoutMs, name)
+      : await handlerPromise;
     const durationMs = Date.now() - startedAt.getTime();
 
     this.audit.log({

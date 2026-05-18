@@ -12,6 +12,13 @@ export { createMcpServer, defineTools } from './factory.js';
 // Server class and custom errors
 export { McpServer, ToolNotFoundError, AuthError, RateLimitError } from './server.js';
 
+// Tool runner utilities
+export { withTimeout, ToolTimeoutError } from './tool-runner.js';
+
+// Transport implementations
+export { StdioTransport } from './transport/index.js';
+export type { StdioTransportOptions } from './transport/index.js';
+
 // Middleware classes (exported for advanced users who want to compose them)
 export { AuthMiddleware } from './middleware/auth.js';
 export { RateLimiter } from './middleware/rate-limiter.js';

@@ -70,6 +70,12 @@ export interface McpServerOptions {
   auth?: AuthConfig;
   rateLimit?: RateLimitConfig;
   audit?: AuditConfig;
+  /**
+   * Optional timeout in milliseconds for each tool handler invocation.
+   * When set, any tool that does not resolve within this time will be rejected
+   * with a `ToolTimeoutError`.
+   */
+  toolTimeoutMs?: number;
 }
 
 /** Public interface of a running MCP server instance. */

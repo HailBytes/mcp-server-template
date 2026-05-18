@@ -1,37 +1,37 @@
-     1|name: CI
-     2|
-     3|on:
-     4|  pull_request:
-     5|    branches: [main]
-     6|  push:
-     7|    branches: [main]
-     8|
-     9|jobs:
-    10|  ci:
-    11|    name: Build, Lint & Test
-    12|    runs-on: ubuntu-latest
-    13|
-    14|    steps:
-    15|      - name: Checkout
-    16|        uses: actions/checkout@v4
-    17|
-    18|      - name: Set up Node.js 20
-    19|        uses: actions/setup-node@v4
-    20|        with:
-    21|          node-version: "20"
-    22|          cache: "npm"
-    23|
-    24|      - name: Install dependencies
-    25|        run: npm install --include=dev
-    26|
-    27|      - name: Lint
-    28|        run: npm run lint
-    29|
-    30|
-    31|      - name: Test
-    32|        run: npm test
-    33|
-    34|
-    35|      - name: Build
-    36|        run: npm run build
-    37|
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  ci:
+    name: Build, Lint & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install --include=dev
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Build
+        run: npm run build
