@@ -4,6 +4,7 @@
 
 [![npm version](https://img.shields.io/npm/v/%40hailbytes%2Fmcp-server-template.svg)](https://www.npmjs.com/package/%40hailbytes%2Fmcp-server-template)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/%40hailbytes%2Fmcp-server-template)](https://bundlephobia.com/package/@hailbytes/mcp-server-template)
 
 ---
 
