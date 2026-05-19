@@ -2,15 +2,8 @@
 
 > Opinionated TypeScript scaffold for production MCP servers with built-in auth, rate limiting, audit logging, and observability.
 
-![Status: Incubation — not yet published to npm](https://img.shields.io/badge/status-incubation-orange)
-
-**Planned npm name:** `@hailbytes/mcp-server-template`
-
----
-
-## ⚠️ Incubation Notice
-
-This package is in early incubation and **has not yet been published to npm**. The API may change without notice. Follow [hailbytes.com](https://hailbytes.com) for release announcements.
+[![npm version](https://img.shields.io/npm/v/%40hailbytes%2Fmcp-server-template.svg)](https://www.npmjs.com/package/%40hailbytes%2Fmcp-server-template)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
 
@@ -26,13 +19,13 @@ This package is in early incubation and **has not yet been published to npm**. T
 
 ---
 
-## Planned Audience
+## Who Is This For
 
 Platform engineers, AI/LLM developers, and product teams who need to ship a secure, observable MCP server quickly without reinventing auth, rate limiting, or logging from scratch.
 
 ---
 
-## Planned API Sketch
+## API
 
 ### Project scaffolder (recommended)
 
