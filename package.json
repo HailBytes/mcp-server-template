@@ -7,7 +7,7 @@
   "author": "HailBytes, LLC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HailBytes/mcp-server-template.git"
+    "url": "git+https://github.com/HailBytes/mcp-server-template.git"
   },
   "bugs": {
     "url": "https://github.com/HailBytes/mcp-server-template/issues"
