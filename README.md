@@ -77,3 +77,6 @@ await server.start();
 - [hailbytes.com](https://hailbytes.com)
 - [hailbytes.com/mcp](https://hailbytes.com/mcp) — MCP server documentation
 - [GitHub Issues](https://github.com/HailBytes/mcp-server-template/issues)
+---
+
+*Part of the [HailBytes](https://hailbytes.com) open-source security toolkit.*
