@@ -1,4 +1,6 @@
 # @hailbytes/mcp-server-template
+![npm](https://img.shields.io/npm/dt/@hailbytes/mcp-server-template)
+
 
 > Opinionated TypeScript scaffold for production MCP servers with built-in auth, rate limiting, audit logging, and observability.
 
