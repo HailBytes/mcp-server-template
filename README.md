@@ -6,6 +6,7 @@
 [![npm downloads](https://img.shields.io/npm/dw/%40hailbytes%2Fmcp-server-template.svg)](https://www.npmjs.com/package/@hailbytes/mcp-server-template)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/%40hailbytes%2Fmcp-server-template)](https://bundlephobia.com/package/@hailbytes/mcp-server-template)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-davidhailbytes-blue?logo=linkedin&style=flat)](https://www.linkedin.com/in/davidhailbytes/)
 
 ---
 
