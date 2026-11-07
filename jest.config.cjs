@@ -9,6 +9,6 @@ module.exports = {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   transform: {
-    '^.+\\.tsx?$': ['ts-jest', { tsconfig: { module: 'CommonJS' } }],
+    '^.+\\.tsx?$': ['ts-jest', { tsconfig: { module: 'CommonJS', types: ['node', 'jest'] } }],
   },
 };
